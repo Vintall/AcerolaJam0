@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eab53922d1164ec89b6fdbe2e512717e, type: 3}
+  m_Name: TestLeftNarrativeClipData
+  m_EditorClassIdentifier: 
+  timelineAsset: {fileID: 11400000, guid: b62ef3febd453cc438972605f98a6b58, type: 2}
+  nextClipId: 6
+  clipId: 5

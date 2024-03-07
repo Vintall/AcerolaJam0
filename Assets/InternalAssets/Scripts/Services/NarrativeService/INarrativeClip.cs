@@ -1,11 +1,12 @@
-﻿namespace InternalAssets.Scripts
+﻿using System;
+
+namespace InternalAssets.Scripts
 {
     public interface INarrativeClip
     {
         void OnStart();
-        void OnEnd();
-        void OnUpdate();
-        INarrativeClip NextClip { get; }
-        INarrativeClip PrevClip { get; }
+        int NextClipId { get; }
+        int ClipId { get; }
+        event Action OnEndCallback;
     }
 }
