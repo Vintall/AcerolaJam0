@@ -104,9 +104,9 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _GradientIntensity: 0.15
-    - _GradientScale: 200
-    - _GridResolution: 230
+    - _GradientIntensity: 0.1
+    - _GradientScale: 4190.9
+    - _GridResolution: 605.7
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1

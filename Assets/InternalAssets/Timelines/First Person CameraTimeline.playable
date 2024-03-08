@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7641301740016206088
+--- !u!114 &-796683397811862814
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 030f85c3f73729f4f976f66ffb23b875, type: 3}
   m_Name: AnimationPlayableAsset
   m_EditorClassIdentifier: 
-  m_Clip: {fileID: -7852456648654380990, guid: 3580a4c0a20a4734fbc773ec17275747, type: 2}
-  m_Position: {x: 0, y: 0, z: 0}
+  m_Clip: {fileID: 7400000, guid: 3fbaca4f480d9074eb527a183b9e797c, type: 2}
+  m_Position: {x: 0, y: 0.45, z: 0}
   m_EulerAngles: {x: 0, y: 0, z: 0}
   m_UseTrackMatchFields: 1
   m_MatchTargetFields: 63
@@ -67,7 +67,7 @@ MonoBehaviour:
   - m_Version: 1
     m_Start: 0
     m_ClipIn: 0
-    m_Asset: {fileID: -7641301740016206088}
+    m_Asset: {fileID: -796683397811862814}
     m_Duration: 6
     m_TimeScale: 1
     m_ParentTrack: {fileID: 4809850899592828588}

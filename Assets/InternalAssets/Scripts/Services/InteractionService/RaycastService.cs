@@ -8,7 +8,7 @@ namespace InternalAssets.Scripts.Services.InteractionService
     {
         [SerializeField] private Transform _camera;
         [SerializeField] private float _interactionDistance;
-        public event Action<RaycastHit[]> _onHit;
+        public event Action<RaycastHit> _onHit;
         private InteractableObject markedToDisableOutline;
 
         public void MarkDisableOutline(InteractableObject interactableObject)
@@ -31,16 +31,16 @@ namespace InternalAssets.Scripts.Services.InteractionService
         private void Raycast()
         {
             var forwardRay = new Ray(_camera.position, _camera.forward);
-            var results = Physics.RaycastAll(forwardRay, _interactionDistance);
 
+            RaycastHit raycastHit;
 
             //if (cachedOutline != null)
             //    cachedOutline.enabled = false;
                 
             //FindFirstInteractable(results);
             
-            if (results.Length != 0)
-                _onHit?.Invoke(results);
+            if (Physics.Raycast(forwardRay, out raycastHit, _interactionDistance))
+                _onHit?.Invoke(raycastHit);
         }
 
         private void FindFirstInteractable(RaycastHit[] results)

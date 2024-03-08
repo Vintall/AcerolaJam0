@@ -104,9 +104,9 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0
     - _GlossyReflections: 1
-    - _GradientIntensity: 0.05
-    - _GradientScale: 180.5
-    - _GridResolution: 82.9
+    - _GradientIntensity: 0.02
+    - _GradientScale: 137.34
+    - _GridResolution: 202.5
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -114,7 +114,7 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Smoothness: 0.4
+    - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -125,7 +125,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 0.4204518, g: 0.29841784, b: 0.2088472, a: 1}
-    - _Color: {r: 0.42045176, g: 0.2984178, b: 0.20884717, a: 1}
+    - _Color: {r: 0.2735849, g: 0.24331693, b: 0.21809362, a: 1}
     - _Emission: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}

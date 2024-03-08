@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace InternalAssets.Scripts
+namespace InternalAssets.Scripts.ItemSlot.Impls
 {
     public class ItemSlot : MonoBehaviour, IItemSlot
     {
