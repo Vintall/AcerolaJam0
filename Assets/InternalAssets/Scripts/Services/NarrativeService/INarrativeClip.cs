@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace InternalAssets.Scripts
+namespace InternalAssets.Scripts.Services.NarrativeService
 {
     public interface INarrativeClip
     {

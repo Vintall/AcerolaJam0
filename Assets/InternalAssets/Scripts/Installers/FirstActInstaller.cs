@@ -1,5 +1,4 @@
-﻿using InternalAssets.Scripts.Services.NarrativeService.NarrativeClips.Act1;
-using InternalAssets.Scripts.Services.PlayableDirector.Impls;
+﻿using InternalAssets.Scripts.Services.PlayableDirector.Impls;
 using UnityEngine;
 using Zenject;
 

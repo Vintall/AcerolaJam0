@@ -1,27 +1,25 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using InternalAssets.Scripts;
-using InternalAssets.Scripts.Services.NarrativeService.NarrativeClips.Act1;
+using InternalAssets.Scripts.NarrativeClips.Act1;
+using InternalAssets.Scripts.Services.NarrativeService.Impls;
 using UnityEngine;
 
 public class NarrativeClipsDatabase : MonoBehaviour
 {
-    [SerializeField] private TestLeftNarrativeClip testLeftNarrativeClip;
-    [SerializeField] private TestRightNarrativeClip testRightNarrativeClip;
+    [SerializeField] private WakeUpClip _wakeUpClip;
+    [SerializeField] private FindFoodClip _findFoodClip;
     
     private List<AbstractNarrativeClip> _narrativeClips;
     private Dictionary<int, AbstractNarrativeClip> _narrativeClipsDictionary;
 
     public List<AbstractNarrativeClip> NarrativeClips => _narrativeClips;
-    public Dictionary<int, AbstractNarrativeClip> NarraticeSlipsDictionary => _narrativeClipsDictionary;
+    public Dictionary<int, AbstractNarrativeClip> NarrativeClipsDictionary => _narrativeClipsDictionary;
     
     public void Awake()
     {
         _narrativeClips = new List<AbstractNarrativeClip>()
         {
-            testLeftNarrativeClip,
-            testRightNarrativeClip
+            _wakeUpClip,
+            _findFoodClip
         };
         _narrativeClipsDictionary = new Dictionary<int, AbstractNarrativeClip>();
         
@@ -35,21 +33,3 @@ public class NarrativeClipsDatabase : MonoBehaviour
     }
 }
 
-public abstract class AbstractNarrativeClip : MonoBehaviour, INarrativeClip
-{
-    [SerializeField] protected int _nextClipId;
-    [SerializeField] protected int _clipId;
-    protected Action _onEndCallback;
-
-    public abstract void OnStart();
-
-    public int NextClipId => _nextClipId;
-
-    public int ClipId => _clipId;
-
-    public event Action OnEndCallback
-    {
-        add => _onEndCallback += value;
-        remove => _onEndCallback -= value;
-    }
-}

@@ -5,17 +5,9 @@ using UnityEngine.Timeline;
 
 namespace InternalAssets.Scripts.Services.NarrativeService.Impls
 {
-    public abstract class CutsceneNarrativeClip : AbstractNarrativeClipScriptableObject
+    public abstract class CutsceneNarrativeClip : AbstractNarrativeClip
     {
-        
-        //public CutsceneNarrativeClip(IPlayableDirectorService playableDirectorService)
-        //{
-        //    _playableDirectorService = playableDirectorService;
-        //}
-        
-        //public override void OnStart()
-        //{
-        //    _playableDirectorService.ChangeTimeline(timelineAsset);
-        //}
+        [SerializeField] protected UnityEngine.Playables.PlayableDirector playableDirector;
+        protected abstract void EndCallback(UnityEngine.Playables.PlayableDirector pD);
     }
 }

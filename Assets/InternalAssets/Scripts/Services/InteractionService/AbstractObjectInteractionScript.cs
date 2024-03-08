@@ -2,8 +2,8 @@
 
 namespace InternalAssets.Scripts.Services.InteractionService
 {
-    public class ObjectInteraction : MonoBehaviour
+    public abstract class AbstractObjectInteractionScript : MonoBehaviour
     {
-        
+        public abstract void Interact();
     }
 }

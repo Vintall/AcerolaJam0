@@ -1,52 +1,45 @@
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using InternalAssets.Scripts.Services.PlayableDirector;
 using UnityEngine;
-using Zenject;
 
-namespace InternalAssets.Scripts
+namespace InternalAssets.Scripts.Services.NarrativeService.Impls
 {
     public class NarrativeService : MonoBehaviour, INarrativeService
     {
         [SerializeField] private NarrativeClipsDatabase narrativeClipsDatabase;
+        [SerializeField] private int firstClipId = 1;
         private readonly IPlayableDirectorService _playableDirectorService;
-        private AbstractNarrativeClip currentNarrativeClip;
-        private int firstId = 1;
+        private AbstractNarrativeClip _currentNarrativeClip;
 
         private void Start()
         {
             StartFirstAnimation();
         }
-
+        
         public void StartFirstAnimation()
         {
-            if (!narrativeClipsDatabase.NarraticeSlipsDictionary.ContainsKey(firstId))
+            if (!narrativeClipsDatabase.NarrativeClipsDictionary.ContainsKey(firstClipId))
                 Debug.LogError("NoSuchKeyInDictionary");
 
-            currentNarrativeClip =
-                Instantiate(narrativeClipsDatabase.NarraticeSlipsDictionary[firstId], transform, true);
-
-            currentNarrativeClip.OnEndCallback += OnEndCallBack;
-            currentNarrativeClip.OnStart();
+            _currentNarrativeClip = narrativeClipsDatabase.NarrativeClipsDictionary[firstClipId];
+            
+            _currentNarrativeClip.OnEndCallback += OnEndCallBack;
+            _currentNarrativeClip.OnStart();
         }
 
         private void OnEndCallBack()
         {
-            currentNarrativeClip.OnEndCallback -= OnEndCallBack;
+            _currentNarrativeClip.OnEndCallback -= OnEndCallBack;
             
-            if(currentNarrativeClip.NextClipId == -1)
+            if(_currentNarrativeClip.NextClipId == -1)
                 Debug.LogError("EndGame");
             
-            if (!narrativeClipsDatabase.NarraticeSlipsDictionary.ContainsKey(firstId))
+            if (!narrativeClipsDatabase.NarrativeClipsDictionary.ContainsKey(_currentNarrativeClip.NextClipId))
                 Debug.LogError("NoSuchKeyInDictionary");
             
-            currentNarrativeClip = narrativeClipsDatabase.NarraticeSlipsDictionary[firstId];
+            _currentNarrativeClip = narrativeClipsDatabase.NarrativeClipsDictionary[_currentNarrativeClip.NextClipId];
             
-            currentNarrativeClip.OnEndCallback += OnEndCallBack;
-            currentNarrativeClip.OnStart();
+            _currentNarrativeClip.OnEndCallback += OnEndCallBack;
+            _currentNarrativeClip.OnStart();
         }
-
-        
     }
 }
