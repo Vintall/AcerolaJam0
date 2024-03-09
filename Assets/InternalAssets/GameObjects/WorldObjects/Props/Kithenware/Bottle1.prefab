@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7094256016275017465}
   - component: {fileID: 3405827764428087172}
   - component: {fileID: 7785404438125952168}
+  - component: {fileID: 6442120263872268461}
   m_Layer: 0
   m_Name: Bottle1
   m_TagString: Untagged
@@ -32,7 +33,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: -90}
 --- !u!33 &3405827764428087172
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -83,3 +84,26 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!136 &6442120263872268461
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1645888714832645836}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.053572383
+  m_Height: 0.32260075
+  m_Direction: 2
+  m_Center: {x: -0.00000023841858, y: -0.0013209209, z: 0.126726}

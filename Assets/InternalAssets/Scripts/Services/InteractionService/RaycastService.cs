@@ -20,7 +20,8 @@ namespace InternalAssets.Scripts.Services.InteractionService
         {
             if (markedToDisableOutline != null)
             {
-                markedToDisableOutline.Outline.OutlineWidth = 0;
+                ServicesHolder.UIInteractionService.ClearData();
+                markedToDisableOutline.SetOutlineWidth(0);
                 markedToDisableOutline = null;
             }
 

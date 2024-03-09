@@ -10,8 +10,11 @@ namespace InternalAssets.Scripts.Services.InteractionService.InteractionScripts
         [SerializeField] private float closedAngle;
         [SerializeField] private float openedAngle;
         [SerializeField] private float animationDuration;
+        [SerializeField] private string openInteractionText;
+        [SerializeField] private string closedInteractionText;
         
-        
+
+
         public override void Interact()
         {
             if(_isOpen)
@@ -21,6 +24,8 @@ namespace InternalAssets.Scripts.Services.InteractionService.InteractionScripts
 
             _isOpen = !_isOpen;
         }
+
+        public override string InteractionText => !_isOpen ? openInteractionText : closedInteractionText;
 
         private void OpenDoor()
         {

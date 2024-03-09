@@ -7,7 +7,6 @@ namespace InternalAssets.Scripts.Services.NarrativeService.Impls
     {
         [SerializeField] private NarrativeClipsDatabase narrativeClipsDatabase;
         [SerializeField] private int firstClipId = 1;
-        private readonly IPlayableDirectorService _playableDirectorService;
         private AbstractNarrativeClip _currentNarrativeClip;
 
         private void Start()

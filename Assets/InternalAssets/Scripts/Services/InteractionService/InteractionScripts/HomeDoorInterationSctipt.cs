@@ -11,7 +11,10 @@ namespace InternalAssets.Scripts.Services.InteractionService.InteractionScripts
         [SerializeField] private Vector3 openedAngle;
         [SerializeField] private float animationDuration;
         [SerializeField] private Collider physicalCollider;
+        [SerializeField] private string openInteractionText;
+        [SerializeField] private string closedInteractionText;
         
+        public override string InteractionText => !_isOpen ? openInteractionText : closedInteractionText;
         public override void Interact()
         {
             if(_isOpen)
@@ -31,6 +34,7 @@ namespace InternalAssets.Scripts.Services.InteractionService.InteractionScripts
                 .Append(transform.DORotate(openedAngle, animationDuration)
                     .SetEase(Ease.OutCubic));
         }
+        
 
         private void CloseDoor()
         {
