@@ -17,6 +17,7 @@ namespace InternalAssets.Scripts.Services
         [SerializeField] private InputHandler playerInputService;
         [SerializeField] private CameraFree playerCameraService;
         [SerializeField] private SoundService soundService;
+        [SerializeField] private CollisionService collisionService;
         
         public static UIInteractionService UIInteractionService => _instance.uiInteractionService;
         public static UIDialogService UIDialogService => _instance.uiDialogService;
@@ -26,6 +27,7 @@ namespace InternalAssets.Scripts.Services
         public static InputHandler PlayerInputService => _instance.playerInputService;
         public static CameraFree PlayerCameraService => _instance.playerCameraService;
         public static SoundService SoundService => _instance.soundService;
+        public static CollisionService CollisionService => _instance.collisionService;
         
         private void Awake()
         {
