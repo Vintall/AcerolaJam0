@@ -11,13 +11,25 @@ namespace InternalAssets.Scripts.Services.InteractionService
         public event Action<RaycastHit> _onHit;
         private InteractableObject markedToDisableOutline;
 
+        public bool serviceEnabled = true;
+
         public void MarkDisableOutline(InteractableObject interactableObject)
         {
             markedToDisableOutline = interactableObject;
         }
         
+        public void DisableOutline(InteractableObject interactableObject)
+        {
+            ServicesHolder.UIInteractionService.ClearData();
+            interactableObject.SetOutlineWidth(0);
+            interactableObject = null;
+        }
+        
         private void Update()
         {
+            if(!serviceEnabled)
+                return;
+            
             if (markedToDisableOutline != null)
             {
                 ServicesHolder.UIInteractionService.ClearData();

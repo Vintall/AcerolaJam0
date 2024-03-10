@@ -61,7 +61,7 @@ namespace QuickOutline.Scripts
     private Color outlineColor = Color.white;
 
     [SerializeField, Range(0f, 10f)]
-    private float outlineWidth = 2f;
+    private float outlineWidth = 0f;
 
     [Header("Optional")]
 
