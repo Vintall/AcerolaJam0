@@ -5,6 +5,7 @@ using InternalAssets.Scripts.Services.InteractionService;
 using InternalAssets.Scripts.Services.NarrativeService.Impls;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.SceneManagement;
 
 namespace InternalAssets.Scripts.NarrativeClips.Act1
 {
@@ -85,6 +86,7 @@ namespace InternalAssets.Scripts.NarrativeClips.Act1
                 .AppendCallback(() =>
                 {
                     playableDirector.Stop();
+                    SceneManager.LoadScene(2);
                     EndCallback();
                 });
         }
