@@ -70891,7 +70891,7 @@ PrefabInstance:
     - target: {fileID: 1517440005249384556, guid: 47b391a80212a714cb0af9eeadf2f0d4,
         type: 3}
       propertyPath: firstClipId
-      value: 9
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2197466619754696639, guid: 47b391a80212a714cb0af9eeadf2f0d4,
         type: 3}

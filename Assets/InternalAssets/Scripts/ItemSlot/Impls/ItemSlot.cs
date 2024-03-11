@@ -30,6 +30,8 @@ namespace InternalAssets.Scripts.ItemSlot.Impls
                 slotTransform.position = slotAnchorPosCached - slotToAnchorVector.normalized * maxDistance;
                 return;
             }
+            
+            
 
             var fractionFromMaxToSlot = (maxDistance - slotToAnchorDistance) / maxDistance;
             var fractionFromAnchorToSlot = 1 - fractionFromMaxToSlot;
@@ -42,6 +44,7 @@ namespace InternalAssets.Scripts.ItemSlot.Impls
             var finalPositionDelta = convergenceForce + divergenceForce;
 
             slotTransform.position += finalPositionDelta * Time.deltaTime;
+            slotTransform.localEulerAngles += (slotAnchorTransform.localEulerAngles - slotTransform.localEulerAngles) * Time.deltaTime;
             _anchorPreviousPosition = slotAnchorTransform.position;
         }
     }

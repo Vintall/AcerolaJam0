@@ -18,6 +18,7 @@ namespace InternalAssets.Scripts.NarrativeClips.Act2
         
         [SerializeField] private GameObject phone;
         [SerializeField] private ItemSlot.Impls.ItemSlot itemSlot;
+        [SerializeField] private Transform itemSlotObject;
 
         [SerializeField] private Transform playerBody;
         [SerializeField] private Transform playerCamera;
@@ -30,6 +31,10 @@ namespace InternalAssets.Scripts.NarrativeClips.Act2
 
         [SerializeField] private Transform fallStartPoint;
         [SerializeField] private float fallCameraPositioningDuration;
+
+        [SerializeField] private Vector3 phoneHidePosition;
+        [SerializeField] private Vector3 phoneHideRotation;
+        [SerializeField] private float phoneHideDuration;
         
         public override void OnStart()
         {
@@ -39,7 +44,7 @@ namespace InternalAssets.Scripts.NarrativeClips.Act2
             ServicesHolder.PlayerInputService.enabled = false;
             ServicesHolder.PlayerCameraService.enabled = false;
             playableDirector.stopped += OnPlayableDirectorStopped;
-            
+            virtualCamera.gameObject.SetActive(true);
             
             DOTween.Sequence()
                 .AppendInterval(initialAwaitDuration)
@@ -48,6 +53,7 @@ namespace InternalAssets.Scripts.NarrativeClips.Act2
                     ServicesHolder.UIInteractionService.SetInteractionData("Press F to turn on light", Color.gray);
                     isF = true;
                 });
+            
         }
 
         private bool isF = false;
@@ -88,7 +94,7 @@ namespace InternalAssets.Scripts.NarrativeClips.Act2
             DOTween.Sequence()
                 .AppendCallback(() =>
                 {
-                    OnRumbleSignal();
+                    //OnRumbleSignal();
                 })
                 .Insert(0, dummyCamera.DOMove(fallStartPoint.position, fallCameraPositioningDuration))
                 .Insert(0, dummyCamera.DORotate(fallStartPoint.eulerAngles, fallCameraPositioningDuration))
@@ -96,6 +102,11 @@ namespace InternalAssets.Scripts.NarrativeClips.Act2
                 {
                     playableDirector.Play();
                 });
+        }
+
+        public void OnWallKickSignal()
+        {
+            phone.SetActive(false);
         }
         
         public void OnRumbleSignal()
@@ -112,8 +123,7 @@ namespace InternalAssets.Scripts.NarrativeClips.Act2
         private void OnPlayableDirectorStopped(PlayableDirector pd)
         {
             playableDirector.stopped -= OnPlayableDirectorStopped;
-
-            phone.SetActive(false);
+            
             playerBody.transform.position = playerAfterFallPosition;
             playerBody.transform.eulerAngles = Vector3.up * playerAfterFallRotation.y;
             playerCamera.eulerAngles = Vector3.right * playerAfterFallRotation.x + Vector3.up * playerAfterFallRotation.y;
@@ -130,9 +140,27 @@ namespace InternalAssets.Scripts.NarrativeClips.Act2
                     isF = true;
                     ServicesHolder.PlayerInputService.enabled = true;
                     ServicesHolder.PlayerCameraService.enabled = true;
+                    ServicesHolder.CollisionService.TriggerEnter += CheckClipChangeTrigger;
                 });
         }
-        
+
+        private void CheckClipChangeTrigger(Collider other)
+        {
+            if(!other.CompareTag("ClipChange"))
+                return;
+            
+            
+            ServicesHolder.CollisionService.TriggerEnter -= CheckClipChangeTrigger;
+            itemSlot.enabled = false;
+            DOTween.Sequence()
+                .Insert(0, itemSlotObject.DOMove(phoneHidePosition, phoneHideDuration))
+                .Insert(0, itemSlotObject.DORotate(phoneHideRotation, phoneHideDuration))
+                .AppendCallback(() =>
+                {
+                    phone.SetActive(false);
+                    EndCallback();
+                });
+        }
 
         protected override void EndClip()
         {

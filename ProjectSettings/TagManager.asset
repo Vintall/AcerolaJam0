@@ -7,6 +7,7 @@ TagManager:
   - Land
   - Interactable
   - TriggerFall
+  - ClipChange
   layers:
   - Default
   - TransparentFX
