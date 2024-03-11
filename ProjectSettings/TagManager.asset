@@ -8,6 +8,9 @@ TagManager:
   - Interactable
   - TriggerFall
   - ClipChange
+  - FloorWood
+  - FloorGrass
+  - FloorStone
   layers:
   - Default
   - TransparentFX

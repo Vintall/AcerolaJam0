@@ -14,7 +14,7 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 1
+  m_Fog: 0
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.03
@@ -23,7 +23,7 @@ RenderSettings:
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 0
+  m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: 3bb994d8a75a4344c810346984451a6f, type: 2}
@@ -35,10 +35,10 @@ RenderSettings:
   m_DefaultReflectionMode: 0
   m_DefaultReflectionResolution: 128
   m_ReflectionBounces: 5
-  m_ReflectionIntensity: 0
+  m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 0}
+  m_IndirectSpecularColor: {r: 0.13869026, g: 0.17362729, b: 0.23609564, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -24921,7 +24921,7 @@ GameObject:
   - component: {fileID: 180822979}
   m_Layer: 0
   m_Name: GrassTerrain
-  m_TagString: Untagged
+  m_TagString: Land
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -24945,14 +24945,14 @@ Terrain:
   m_HeightmapPixelError: 5
   m_SplatMapDistance: 1000
   m_HeightmapMaximumLOD: 0
-  m_ShadowCastingMode: 2
+  m_ShadowCastingMode: 0
   m_DrawHeightmap: 0
-  m_DrawInstanced: 1
+  m_DrawInstanced: 0
   m_DrawTreesAndFoliage: 1
   m_StaticShadowCaster: 0
   m_IgnoreQualitySettings: 0
-  m_ReflectionProbeUsage: 1
-  m_MaterialTemplate: {fileID: 2100000, guid: 594ea882c5a793440b60ff72d896021e, type: 2}
+  m_ReflectionProbeUsage: 0
+  m_MaterialTemplate: {fileID: 0}
   m_BakeLightProbesForTrees: 1
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1
@@ -24962,7 +24962,7 @@ Terrain:
   m_GroupingID: 0
   m_RenderingLayerMask: 1
   m_AllowAutoConnect: 1
-  m_EnableHeightmapRayTracing: 1
+  m_EnableHeightmapRayTracing: 0
   m_EnableTreesAndDetailsRayTracing: 0
   m_TreeMotionVectorModeOverride: 3
 --- !u!4 &180822978
@@ -24999,7 +24999,7 @@ TerrainCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_TerrainData: {fileID: 15600000, guid: 4c28ef5fbdaf2e84f8f4e19a60e460ab, type: 2}
-  m_EnableTreeColliders: 1
+  m_EnableTreeColliders: 0
 --- !u!1001 &187374476
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25625,6 +25625,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Stairs (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4507732431645698356, guid: 4446cd4fdc0e2bc4d930edc563b31b9e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4732223540590032581, guid: 4446cd4fdc0e2bc4d930edc563b31b9e,
         type: 3}
@@ -29777,6 +29782,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 473331369}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &474783887 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5045921270516204440, guid: 55e4a7a4fc0d49b44bc4ce8384487cf3,
+    type: 3}
+  m_PrefabInstance: {fileID: 642851566626746100}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &479113028 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8758402522616325569, guid: 7f1ca67de92e8ed4c9dffaf72733d43a,
@@ -29879,7 +29890,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &491344962
 Transform:
   m_ObjectHideFlags: 0
@@ -36299,6 +36310,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 446597420234862668}
     m_Modifications:
+    - target: {fileID: 1194310425787214722, guid: 4446cd4fdc0e2bc4d930edc563b31b9e,
+        type: 3}
+      propertyPath: m_TagString
+      value: FloorWood
+      objectReference: {fileID: 0}
     - target: {fileID: 3132108348732664236, guid: 4446cd4fdc0e2bc4d930edc563b31b9e,
         type: 3}
       propertyPath: m_Mesh
@@ -36309,6 +36325,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Stairs
+      objectReference: {fileID: 0}
+    - target: {fileID: 4507732431645698356, guid: 4446cd4fdc0e2bc4d930edc563b31b9e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4732223540590032581, guid: 4446cd4fdc0e2bc4d930edc563b31b9e,
         type: 3}
@@ -38068,7 +38089,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1114956516
 Transform:
   m_ObjectHideFlags: 0
@@ -39485,7 +39506,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1230409614
 Transform:
   m_ObjectHideFlags: 0
@@ -43404,7 +43425,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1557804659
 Transform:
   m_ObjectHideFlags: 0
@@ -52064,7 +52085,7 @@ GameObject:
   - component: {fileID: 6942959678595530827}
   m_Layer: 0
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: FloorWood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -52496,7 +52517,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!33 &612808666274825816
 MeshFilter:
@@ -53632,7 +53653,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!23 &1016857518241963625
 MeshRenderer:
@@ -53848,7 +53869,7 @@ GameObject:
   - component: {fileID: 4911014609197374014}
   m_Layer: 0
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: FloorWood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -55969,7 +55990,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &1702862538466360670 stripped
 Transform:
@@ -64202,7 +64223,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!23 &4210512957412837855
 MeshRenderer:
@@ -65876,7 +65897,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &4648963141095500798
 GameObject:
@@ -67177,7 +67198,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &5084828760267936088
 Transform:
@@ -70888,10 +70909,20 @@ PrefabInstance:
       propertyPath: interactableObjects.Array.data[9]
       value: 
       objectReference: {fileID: 855426192}
+    - target: {fileID: 1198137611980252402, guid: 47b391a80212a714cb0af9eeadf2f0d4,
+        type: 3}
+      propertyPath: playedFeet
+      value: 
+      objectReference: {fileID: 474783887}
+    - target: {fileID: 1198137611980252402, guid: 47b391a80212a714cb0af9eeadf2f0d4,
+        type: 3}
+      propertyPath: inputHandler
+      value: 
+      objectReference: {fileID: 3751843311300907071}
     - target: {fileID: 1517440005249384556, guid: 47b391a80212a714cb0af9eeadf2f0d4,
         type: 3}
       propertyPath: firstClipId
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2197466619754696639, guid: 47b391a80212a714cb0af9eeadf2f0d4,
         type: 3}
@@ -79186,8 +79217,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6101698486788448199}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -462.59705, y: -257.76752, z: 0.21866255}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

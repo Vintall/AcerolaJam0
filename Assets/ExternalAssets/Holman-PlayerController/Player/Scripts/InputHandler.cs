@@ -26,8 +26,13 @@ namespace HolmanPlayerController
             plCtrl = GetComponent<PlayerController>();
         }
 
+        public bool walking = false;
+        public bool running = false;
         private void Update()
         {
+            walking = false;
+            running = false;
+            
             Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             _inputDir = input.normalized;
 
@@ -38,11 +43,13 @@ namespace HolmanPlayerController
 
             if (plCtrl.State.RunSpeedCheck())
             {
+                running = true;
                 plCtrl.State.RunSpeed();
             }
 
             if (plCtrl.State.WalkSpeedCheck())
             {
+                walking = true;
                 plCtrl.State.WalkSpeed();
             }
             

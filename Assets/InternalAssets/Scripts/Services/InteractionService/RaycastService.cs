@@ -37,11 +37,11 @@ namespace InternalAssets.Scripts.Services.InteractionService
                 markedToDisableOutline = null;
             }
 
-            Raycast();
+            CameraRaycast();
         }
 
         //private Outline cachedOutline;
-        private void Raycast()
+        private void CameraRaycast()
         {
             var forwardRay = new Ray(_camera.position, _camera.forward);
 
