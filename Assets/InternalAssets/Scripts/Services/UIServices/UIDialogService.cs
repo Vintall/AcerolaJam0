@@ -20,7 +20,37 @@ namespace InternalAssets.Scripts.Services.UIServices
             ClearPanel();
         }
 
-        public void PrintObjective(string text, float symbolPrintDuration)
+        public void ShowPanel()
+        {
+            
+        }
+        
+        public void HidePanel()
+        {
+            var minimizePosition = -Screen.width / 3;
+            var hidePosition = minimizePosition - Screen.width * 0.02f;
+            
+            _printSequence = DOTween.Sequence()
+                .Append(dialogPanel.DOAnchorPosY(hidePosition, panelSlideDuration)
+                    .SetEase(Ease.OutCubic));
+        }
+
+        public void ClearPanel()
+        {
+            _printSequence.Kill();
+            _printSequence = null;
+            dialogText.text = "";
+        }
+
+        public void HideImmediately()
+        {
+            var minimizePosition = -Screen.width / 3;
+            var hidePosition = minimizePosition - Screen.width * 0.02f;
+
+            dialogPanel.DOAnchorPosY(hidePosition, 0);
+        }
+        
+        public void PrintDialog(string text, float symbolPrintDuration)
         {
             if(_printSequence != null)
                 return;
@@ -45,23 +75,6 @@ namespace InternalAssets.Scripts.Services.UIServices
                 .AppendInterval(awaitDuration)
                 .AppendCallback(HidePanel);
         }
-        public void HidePanel()
-        {
-            var minimizePosition = -Screen.width / 3;
-            var hidePosition = minimizePosition - Screen.width * 0.02f;
-            
-            _printSequence = DOTween.Sequence()
-                .Append(dialogPanel.DOAnchorPosY(hidePosition, panelSlideDuration)
-                    .SetEase(Ease.OutCubic));
-        }
-
-        public void ClearPanel()
-        {
-            var minimizePosition = -Screen.width / 3;
-            var hidePosition = minimizePosition - Screen.width * 0.02f;
-
-            dialogPanel.DOAnchorPosY(hidePosition, 0);
-            dialogText.text = "";
-        }
+        
     }
 }

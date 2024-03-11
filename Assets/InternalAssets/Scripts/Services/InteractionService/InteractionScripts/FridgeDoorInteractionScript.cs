@@ -12,7 +12,9 @@ namespace InternalAssets.Scripts.Services.InteractionService.InteractionScripts
         [SerializeField] private float animationDuration;
         [SerializeField] private string openInteractionText;
         [SerializeField] private string closedInteractionText;
-        
+        [SerializeField] private AudioSource audioSource;
+        [SerializeField] private AudioClip openingAudioClip;
+        [SerializeField] private AudioClip closingAudioClip;
 
 
         public override void Interact()
@@ -30,7 +32,8 @@ namespace InternalAssets.Scripts.Services.InteractionService.InteractionScripts
         private void OpenDoor()
         {
             KillSequence();
-
+            audioSource.clip = openingAudioClip;
+            audioSource.Play();
             var rotateVector = Vector3.forward * openedAngle;
 
             fridgeDoorSequence = DOTween.Sequence()
@@ -41,7 +44,8 @@ namespace InternalAssets.Scripts.Services.InteractionService.InteractionScripts
         private void CloseDoor()
         {
             KillSequence();
-            
+            audioSource.clip = closingAudioClip;
+            audioSource.Play();
             var rotateVector = Vector3.forward * closedAngle;
 
             fridgeDoorSequence = DOTween.Sequence()

@@ -13,6 +13,9 @@ namespace InternalAssets.Scripts.Services.InteractionService.InteractionScripts
         [SerializeField] private Collider physicalCollider;
         [SerializeField] private string openInteractionText;
         [SerializeField] private string closedInteractionText;
+        [SerializeField] private AudioSource audioSource;
+        [SerializeField] private AudioClip openingAudioClip;
+        [SerializeField] private AudioClip closingAudioClip;
         
         public override string InteractionText => !_isOpen ? openInteractionText : closedInteractionText;
         public override void Interact()
@@ -28,7 +31,8 @@ namespace InternalAssets.Scripts.Services.InteractionService.InteractionScripts
         private void OpenDoor()
         {
             KillSequence();
-
+            audioSource.clip = openingAudioClip;
+            audioSource.Play();
             physicalCollider.enabled = false;
             doorSequence = DOTween.Sequence()
                 .Append(transform.DORotate(openedAngle, animationDuration)
@@ -39,7 +43,8 @@ namespace InternalAssets.Scripts.Services.InteractionService.InteractionScripts
         private void CloseDoor()
         {
             KillSequence();
-
+            audioSource.clip = closingAudioClip;
+            audioSource.Play();
             doorSequence = DOTween.Sequence()
                 .Append(transform.DORotate(closedAngle, animationDuration)
                     .SetEase(Ease.InCubic))

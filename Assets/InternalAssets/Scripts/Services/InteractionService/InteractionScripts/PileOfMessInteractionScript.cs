@@ -7,11 +7,12 @@ namespace InternalAssets.Scripts.Services.InteractionService.InteractionScripts
     {
         [SerializeField] private List<GameObject> spawnableObjects;
         [SerializeField] private string interactionText;
+        [SerializeField] private AudioSource audioSource;
 
         public override void Interact()
         {
+            audioSource.Play();
             gameObject.SetActive(false);
-            
             foreach (var spawnableObject in spawnableObjects)
                 spawnableObject.SetActive(true);
         }

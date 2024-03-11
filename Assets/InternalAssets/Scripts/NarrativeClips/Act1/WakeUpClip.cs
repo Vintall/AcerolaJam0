@@ -1,4 +1,5 @@
 using HolmanPlayerController;
+using InternalAssets.Scripts.Services;
 using InternalAssets.Scripts.Services.NarrativeService.Impls;
 using UnityEngine;
 using UnityEngine.Playables;
@@ -16,6 +17,11 @@ namespace InternalAssets.Scripts.NarrativeClips.Act1
             _cameraFree.enabled = false;
             playableDirector.Play();
             playableDirector.stopped += EndCallback;
+        }
+
+        public void AnimationEvent1()
+        {
+            //ServicesHolder.UIDialogService.p
         }
 
         protected override void EndClip()

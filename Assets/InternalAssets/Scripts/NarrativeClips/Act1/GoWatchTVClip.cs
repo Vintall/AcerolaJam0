@@ -1,4 +1,5 @@
-﻿using Cinemachine;
+﻿using System.Collections.Generic;
+using Cinemachine;
 using DG.Tweening;
 using InternalAssets.Scripts.Services;
 using InternalAssets.Scripts.Services.InteractionService;
@@ -27,6 +28,9 @@ namespace InternalAssets.Scripts.NarrativeClips.Act1
         [SerializeField] private Transform playerStandUpTransform;
 
         [SerializeField] private Transform playerBody;
+
+        [SerializeField] private List<Color> tvColors;
+        [SerializeField] private Material tvPlaneMaterial;
         
         public override void OnStart()
         {
@@ -35,9 +39,26 @@ namespace InternalAssets.Scripts.NarrativeClips.Act1
             playableDirector.stopped += OnPlayableDirectorStopped;
         }
 
+        private int switchCount = 0;
         public void OnTVSwitch()
         {  
             tvSwitch.Play();
+
+            if (switchCount == 0)
+            {
+                DOTween.Sequence()
+                    .AppendCallback(() => { tvPlaneMaterial.color = tvColors[1]; })
+                    .AppendInterval(tvSwitch.clip.length)
+                    .AppendCallback(() => { tvPlaneMaterial.color = tvColors[2]; });
+                switchCount = 1;
+            }
+            else if (switchCount == 1)
+            {
+                DOTween.Sequence()
+                    .AppendCallback(() => { tvPlaneMaterial.color = tvColors[1]; })
+                    .AppendInterval(tvSwitch.clip.length)
+                    .AppendCallback(() => { tvPlaneMaterial.color = tvColors[3]; });
+            }
         }
 
         public void OnSceneChange() //Eye closed
@@ -49,6 +70,12 @@ namespace InternalAssets.Scripts.NarrativeClips.Act1
         {
             rumbleAudioSource.Play();
             explosionAudioSource.Play();
+            tvSwitch.Play();
+
+            DOTween.Sequence()
+                .AppendCallback(() => { tvPlaneMaterial.color = tvColors[1]; })
+                .AppendInterval(tvSwitch.clip.length)
+                .AppendCallback(() => { tvPlaneMaterial.color = tvColors[0]; });
         }
 
         public void OnExplosionReaction()
