@@ -18,6 +18,7 @@ namespace InternalAssets.Scripts.Services.UIServices
         private void Awake()
         {
             ClearPanel();
+            HidePanel(0);
         }
 
         public Sequence ShowPanel()
@@ -131,6 +132,44 @@ namespace InternalAssets.Scripts.Services.UIServices
             }
             return _printSequence;
         }
-        
+
+        public Sequence AddDialog(string text, float symbolPrintDuration, float pitch = 1)
+        {
+            if (_printSequence != null)
+            {
+                _printSequence.Kill();
+                _printSequence = null;
+            }
+            var stringBuilder = new StringBuilder(text.Length);
+            var oldText = dialogText.text;
+            
+            _printSequence = DOTween.Sequence()
+                .AppendCallback(() =>
+                {
+                    ServicesHolder.GibberishService.PlayStream(pitch);
+                    stringBuilder.Append(oldText);
+                });
+            
+            
+            
+            for (var i = 0; i < text.Length; ++i)
+            {
+                _printSequence
+                    .AppendCallback(() =>
+                    {
+                        stringBuilder.Append(text[stringBuilder.Length - oldText.Length]);
+                        dialogText.text = stringBuilder.ToString();
+                    })
+                    .AppendInterval(symbolPrintDuration);
+                
+                if (i == text.Length - 2)
+                    _printSequence
+                        .AppendCallback(() =>
+                        {
+                            ServicesHolder.GibberishService.StopStream();
+                        });
+            }
+            return _printSequence;
+        }
     }
 }

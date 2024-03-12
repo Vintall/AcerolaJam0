@@ -87,7 +87,36 @@ namespace InternalAssets.Scripts.NarrativeClips.Act2
 
         public void AnimationTrigger1()
         {
-            
+            var dialogService = ServicesHolder.UIDialogService;
+            var standartDuration = 0.04f;
+
+            DOTween.Sequence()
+                .Append(dialogService.ShowPanel())
+                .Join(dialogService.PrintDialog("The core is melted completely!", standartDuration, 0.8f))
+                .AppendInterval(0.3f)
+                .Append(dialogService.PrintDialogWoCleaning("The core is melted completely! ",
+                    "What was you thinking?...", standartDuration, 0.8f))
+                .AppendInterval(1f)
+                .Append(dialogService.PrintDialog(
+                    "After the pulse, the ground all over the city started spilling into here.", standartDuration,
+                    0.8f))
+                .AppendInterval(0.5f)
+                .Append(dialogService.PrintDialogWoCleaning(
+                    "After the pulse, the ground all over the city started spilling into here. ",
+                    "There's no way to keep the complex a secret.", standartDuration, 0.8f))
+                .AppendInterval(1f)
+                .Append(dialogService.PrintDialog("I need to tell them.", standartDuration, 0.8f))
+                .AppendInterval(1f)
+                .Append(dialogService.PrintDialogWoCleaning("I need to tell them. ", "And fast.", standartDuration,
+                    0.8f))
+                .AppendInterval(1f)
+                .Append(dialogService.PrintDialog("Where the hell is my teleporter?", standartDuration, 0.8f))
+                .Append(dialogService.HidePanel())
+                .Append(dialogService.ShowPanel())
+                .Join(dialogService.PrintDialog("Teleporter, huh?", 0.06f, 1f))
+                .AppendInterval(0.3f)
+                .Append(dialogService.PrintDialogWoCleaning("Teleporter, huh? ", "I guess, thaw will do.", 0.06f,
+                    1f));
         }
 
         public void AnimationTrigger2()
@@ -115,6 +144,17 @@ namespace InternalAssets.Scripts.NarrativeClips.Act2
                 strangeDevice.gameObject.SetActive(false);
                 strangeDeviceAnimated.gameObject.SetActive(true);
 
+                var dialogService = ServicesHolder.UIDialogService;
+                var standartDuration = 0.06f;
+            
+                DOTween.Sequence()
+                    .Append(dialogService.ShowPanel())
+                    .Join(dialogService.PrintDialog("What is this.", standartDuration))
+                    .AppendInterval(0.3f)
+                    .Append(dialogService.PrintDialogWoCleaning("What is this. ", "Never saw anything like that.", standartDuration))
+                    .AppendInterval(1f)
+                    .Append(dialogService.HidePanel());
+                
                 DOTween.Sequence()
                     .Insert(0, dummyCamera.DOMove(animationStartTransform.position, cameraTranslationDuration))
                     .Insert(0, dummyCamera.DORotate(animationStartTransform.eulerAngles, cameraTranslationDuration))

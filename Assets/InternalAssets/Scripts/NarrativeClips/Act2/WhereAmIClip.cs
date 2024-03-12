@@ -35,6 +35,7 @@ namespace InternalAssets.Scripts.NarrativeClips.Act2
         [SerializeField] private Vector3 phoneHidePosition;
         [SerializeField] private Vector3 phoneHideRotation;
         [SerializeField] private float phoneHideDuration;
+        [SerializeField] private AudioSource ambientAudioSource;
         
         public override void OnStart()
         {
@@ -45,15 +46,30 @@ namespace InternalAssets.Scripts.NarrativeClips.Act2
             ServicesHolder.PlayerCameraService.enabled = false;
             playableDirector.stopped += OnPlayableDirectorStopped;
             virtualCamera.gameObject.SetActive(true);
+
+            ambientAudioSource.volume = 0;
+            
+            var dialogService = ServicesHolder.UIDialogService;
+            var standartDuration = 0.08f;
             
             DOTween.Sequence()
+                .Append(ambientAudioSource.DOFade(0.1f, 2f))
+                .AppendInterval(4f)
+                .Append(dialogService.ShowPanel())
+                .Join(dialogService.PrintDialog("I'm alive? ", standartDuration))
+                .AppendInterval(1f)
+                .Append(dialogService.HidePanel())
+                .AppendInterval(3f)
+                .Append(dialogService.ShowPanel())
+                .Join(dialogService.PrintDialog("Where am I?", standartDuration))
+                .AppendInterval(1f)
+                .Append(dialogService.HidePanel())
                 .AppendInterval(initialAwaitDuration)
                 .AppendCallback(() =>
                 {
                     ServicesHolder.UIInteractionService.SetInteractionData("Press F to turn on light", Color.gray);
                     isF = true;
                 });
-            
         }
 
         private bool isF = false;
@@ -72,6 +88,7 @@ namespace InternalAssets.Scripts.NarrativeClips.Act2
                 ServicesHolder.PlayerCameraService.enabled = true;
 
                 ServicesHolder.CollisionService.TriggerEnter += MyOnTriggerEnter;
+                
             }
         }
 
@@ -94,12 +111,20 @@ namespace InternalAssets.Scripts.NarrativeClips.Act2
             DOTween.Sequence()
                 .AppendCallback(() =>
                 {
-                    //OnRumbleSignal();
+                    
                 })
                 .Insert(0, dummyCamera.DOMove(fallStartPoint.position, fallCameraPositioningDuration))
                 .Insert(0, dummyCamera.DORotate(fallStartPoint.eulerAngles, fallCameraPositioningDuration))
                 .AppendCallback(() =>
                 {
+                    var dialogService = ServicesHolder.UIDialogService;
+                    DOTween.Sequence()
+                        .AppendInterval(0.8f)
+                        .Append(dialogService.ShowPanel(0.1f))
+                        .Join(dialogService.PrintDialog("Not agaaain!", 0.03f, 1.1f))
+                        .AppendInterval(0.3f)
+                        .Append(dialogService.HidePanel());
+                    
                     playableDirector.Play();
                 });
         }
@@ -132,7 +157,16 @@ namespace InternalAssets.Scripts.NarrativeClips.Act2
             dummyCamera.gameObject.SetActive(false);
             virtualCamera.gameObject.SetActive(false);
             
+            var dialogService = ServicesHolder.UIDialogService;
+            var standartDuration = 0.06f;
+            
             DOTween.Sequence()
+                .Append(dialogService.ShowPanel())
+                .Join(dialogService.PrintDialog("Eventually, I'm just fall to my death.. ", standartDuration))
+                .AppendInterval(1f)
+                .Append(dialogService.PrintDialog("And how the hell am I going to get out? ", standartDuration))
+                .AppendInterval(1f)
+                .Append(dialogService.HidePanel())
                 .AppendInterval(initialAwaitDuration)
                 .AppendCallback(() =>
                 {
@@ -149,6 +183,17 @@ namespace InternalAssets.Scripts.NarrativeClips.Act2
             if(!other.CompareTag("ClipChange"))
                 return;
             
+            
+            var dialogService = ServicesHolder.UIDialogService;
+            var standartDuration = 0.06f;
+            
+            DOTween.Sequence()
+                .Append(dialogService.ShowPanel())
+                .Join(dialogService.PrintDialog("What...", standartDuration))
+                .AppendInterval(1f)
+                .Append(dialogService.PrintDialogWoCleaning("What...", " What is this place?", standartDuration))
+                .AppendInterval(1f)
+                .Append(dialogService.HidePanel());
             
             ServicesHolder.CollisionService.TriggerEnter -= CheckClipChangeTrigger;
             itemSlot.enabled = false;
