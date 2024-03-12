@@ -11,11 +11,13 @@ namespace InternalAssets.Scripts.Services
         [SerializeField] private AudioSource audioSource1;
         [SerializeField] private AudioSource audioSource2;
         [SerializeField] private List<AudioClip> samples;
+        [SerializeField] private float ratio;
         private Sequence _streamSequence;
+        
         
         private void Start()
         {
-            PlayStream();
+            
         }
         
         public float PlaySound1()
@@ -34,7 +36,7 @@ namespace InternalAssets.Scripts.Services
 
         private bool isFirst;
 
-        public void PlayStream()
+        public void PlayStream(float pitch = 1)
         {
             if (_streamSequence != null)
             {
@@ -42,14 +44,20 @@ namespace InternalAssets.Scripts.Services
                 _streamSequence = null;
             }
 
+            if (Mathf.Abs(audioSource1.pitch - pitch) > 0.0001f)
+            {
+                audioSource1.pitch = pitch;
+                audioSource2.pitch = pitch;
+            }
+
             float length = 0;
 
             _streamSequence = DOTween.Sequence()
-                .AppendInterval((isFirst ? PlaySound1() : PlaySound2()) / 2f)
+                .AppendInterval((isFirst ? PlaySound1() : PlaySound2()) / ratio)
                 .OnComplete(() =>
                 {
                     isFirst = !isFirst;
-                    PlayStream();
+                    PlayStream(pitch);
                 });
         }
 

@@ -13,7 +13,6 @@ namespace InternalAssets.Scripts.Services.InteractionService.InteractionScripts
         {
             gameObject.SetActive(false);
             audioSource.Play();
-            Debug.Log("SausagesInteract");
         }
     }
 }

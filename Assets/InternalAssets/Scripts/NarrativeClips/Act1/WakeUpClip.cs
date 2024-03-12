@@ -1,3 +1,4 @@
+using DG.Tweening;
 using HolmanPlayerController;
 using InternalAssets.Scripts.Services;
 using InternalAssets.Scripts.Services.NarrativeService.Impls;
@@ -21,7 +22,16 @@ namespace InternalAssets.Scripts.NarrativeClips.Act1
 
         public void AnimationEvent1()
         {
-            //ServicesHolder.UIDialogService.p
+            var dialogService = ServicesHolder.UIDialogService;
+            var standartDuration = 0.06f;
+            
+            DOTween.Sequence()
+                .Append(dialogService.ShowPanel())
+                .Join(dialogService.PrintDialog("Damn. What a mess. ", standartDuration))
+                .AppendInterval(1.5f)
+                .Append(dialogService.PrintDialog("And already evening... ", standartDuration))
+                .AppendInterval(1f)
+                .Append(dialogService.HidePanel());
         }
 
         protected override void EndClip()

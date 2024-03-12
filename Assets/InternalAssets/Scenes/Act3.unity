@@ -296,6 +296,7 @@ MonoBehaviour:
   playerCameraService: {fileID: 1048298648}
   soundService: {fileID: 655018296}
   collisionService: {fileID: 746911510}
+  gibberishService: {fileID: 0}
 --- !u!4 &33443849
 Transform:
   m_ObjectHideFlags: 0
@@ -5286,7 +5287,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &932727713
 Transform:
   m_ObjectHideFlags: 0

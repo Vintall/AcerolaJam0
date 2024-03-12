@@ -18,6 +18,7 @@ namespace InternalAssets.Scripts.Services
         [SerializeField] private CameraFree playerCameraService;
         [SerializeField] private SoundService soundService;
         [SerializeField] private CollisionService collisionService;
+        [SerializeField] private GibberishService gibberishService;
         
         public static UIInteractionService UIInteractionService => _instance.uiInteractionService;
         public static UIDialogService UIDialogService => _instance.uiDialogService;
@@ -28,6 +29,7 @@ namespace InternalAssets.Scripts.Services
         public static CameraFree PlayerCameraService => _instance.playerCameraService;
         public static SoundService SoundService => _instance.soundService;
         public static CollisionService CollisionService => _instance.collisionService;
+        public static GibberishService GibberishService => _instance.gibberishService;
         
         private void Awake()
         {

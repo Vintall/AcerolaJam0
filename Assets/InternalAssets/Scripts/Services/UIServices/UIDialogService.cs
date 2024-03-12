@@ -20,18 +20,36 @@ namespace InternalAssets.Scripts.Services.UIServices
             ClearPanel();
         }
 
-        public void ShowPanel()
+        public Sequence ShowPanel()
         {
-            
+            return DOTween.Sequence()
+                .Append(dialogPanel.DOAnchorPosY(0, panelSlideDuration)
+                    .SetEase(Ease.OutCubic));
+        }
+        public Sequence ShowPanel(float duration)
+        {
+            return DOTween.Sequence()
+                .Append(dialogPanel.DOAnchorPosY(0, duration)
+                    .SetEase(Ease.OutCubic));
         }
         
-        public void HidePanel()
+        public Sequence HidePanel()
         {
             var minimizePosition = -Screen.width / 3;
             var hidePosition = minimizePosition - Screen.width * 0.02f;
             
-            _printSequence = DOTween.Sequence()
+            return DOTween.Sequence()
                 .Append(dialogPanel.DOAnchorPosY(hidePosition, panelSlideDuration)
+                    .SetEase(Ease.OutCubic));
+        }
+        
+        public Sequence HidePanel(float duration)
+        {
+            var minimizePosition = -Screen.width / 3;
+            var hidePosition = minimizePosition - Screen.width * 0.02f;
+            
+            return DOTween.Sequence()
+                .Append(dialogPanel.DOAnchorPosY(hidePosition, duration)
                     .SetEase(Ease.OutCubic));
         }
 
@@ -42,24 +60,20 @@ namespace InternalAssets.Scripts.Services.UIServices
             dialogText.text = "";
         }
 
-        public void HideImmediately()
+        public Sequence PrintDialog(string text, float symbolPrintDuration, float pitch = 1)
         {
-            var minimizePosition = -Screen.width / 3;
-            var hidePosition = minimizePosition - Screen.width * 0.02f;
+            if (_printSequence != null)
+            {
+                _printSequence.Kill();
+                ClearPanel();
+                _printSequence = null;
+            }
 
-            dialogPanel.DOAnchorPosY(hidePosition, 0);
-        }
-        
-        public void PrintDialog(string text, float symbolPrintDuration)
-        {
-            if(_printSequence != null)
-                return;
-            
             _printSequence = DOTween.Sequence()
-                .Append(dialogPanel.DOAnchorPosY(0, panelSlideDuration)
-                    .SetEase(Ease.OutCubic));
-
-            var stringBuilder = new StringBuilder();
+                .AppendCallback(() => ServicesHolder.GibberishService.PlayStream(pitch));
+            
+            
+            var stringBuilder = new StringBuilder(text.Length);
             for (var i = 0; i < text.Length; ++i)
             {
                 _printSequence
@@ -69,11 +83,53 @@ namespace InternalAssets.Scripts.Services.UIServices
                         dialogText.text = stringBuilder.ToString();
                     })
                     .AppendInterval(symbolPrintDuration);
+                
+                if (i == text.Length - 2)
+                    _printSequence
+                        .AppendCallback(() =>
+                        {
+                            ServicesHolder.GibberishService.StopStream();
+                        });
             }
+            return _printSequence;
+        }
+        
+        public Sequence PrintDialogWoCleaning(string oldText, string text, float symbolPrintDuration, float pitch = 1)
+        {
+            if (_printSequence != null)
+            {
+                _printSequence.Kill();
+                _printSequence = null;
+            }
+            var stringBuilder = new StringBuilder(text.Length);
 
-            _printSequence
-                .AppendInterval(awaitDuration)
-                .AppendCallback(HidePanel);
+            _printSequence = DOTween.Sequence()
+                .AppendCallback(() =>
+                {
+                    ServicesHolder.GibberishService.PlayStream(pitch);
+                    stringBuilder.Append(oldText);
+                });
+            
+            
+            
+            for (var i = 0; i < text.Length; ++i)
+            {
+                _printSequence
+                    .AppendCallback(() =>
+                    {
+                        stringBuilder.Append(text[stringBuilder.Length - oldText.Length]);
+                        dialogText.text = stringBuilder.ToString();
+                    })
+                    .AppendInterval(symbolPrintDuration);
+                
+                if (i == text.Length - 2)
+                    _printSequence
+                        .AppendCallback(() =>
+                        {
+                            ServicesHolder.GibberishService.StopStream();
+                        });
+            }
+            return _printSequence;
         }
         
     }

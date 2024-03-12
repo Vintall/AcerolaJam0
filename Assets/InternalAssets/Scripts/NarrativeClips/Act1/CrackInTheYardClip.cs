@@ -161,6 +161,20 @@ namespace InternalAssets.Scripts.NarrativeClips.Act1
                         dummyCamera.eulerAngles = Vector3.zero;
                         playableDirector.Play();
                     });
+                
+                var dialogService = ServicesHolder.UIDialogService;
+                var standartDuration = 0.06f;
+
+                DOTween.Sequence()
+                    .Append(dialogService.ShowPanel())
+                    .Join(dialogService.PrintDialog("What is that.", standartDuration, 1.1f))
+                    .AppendInterval(0.5f)
+                    .Append(dialogService.HidePanel())
+                    .AppendInterval(2.5f)
+                    .Append(dialogService.ShowPanel(0))
+                    .Append(dialogService.PrintDialog("Oh, that can't be good", standartDuration / 2, 1f))
+                    .AppendInterval(0.5f)
+                    .Append(dialogService.HidePanel());
             }
         }
     }
