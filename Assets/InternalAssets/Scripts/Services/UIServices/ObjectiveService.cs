@@ -18,7 +18,7 @@ namespace InternalAssets.Scripts.Services.UIServices
             ClearPanel();
         }
 
-        public void PrintObjective(string text, float symbolPrintDuration)
+        public void PrintObjective(string text, float symbolPrintDuration = 0.05f)
         {
             if(_printSequence != null)
                 return;

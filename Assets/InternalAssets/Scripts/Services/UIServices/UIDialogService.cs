@@ -140,6 +140,7 @@ namespace InternalAssets.Scripts.Services.UIServices
                 _printSequence.Kill();
                 _printSequence = null;
             }
+            
             var stringBuilder = new StringBuilder(text.Length);
             var oldText = dialogText.text;
             

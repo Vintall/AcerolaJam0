@@ -3,6 +3,7 @@ using DG.Tweening;
 using InternalAssets.Scripts.Services;
 using InternalAssets.Scripts.Services.InteractionService;
 using InternalAssets.Scripts.Services.NarrativeService.Impls;
+using InternalAssets.Scripts.Services.UIServices;
 using UnityEngine;
 
 namespace InternalAssets.Scripts.NarrativeClips.Act3
@@ -11,30 +12,65 @@ namespace InternalAssets.Scripts.NarrativeClips.Act3
     {
         [SerializeField] private float workerPitch = 1.1f;
         [SerializeField] private float characterPitch = 1;
-        [SerializeField] private float charDuration = 0.06f; 
+        [SerializeField] private float charDuration = 0.06f;
+        [SerializeField] private GameObject outCollider;
+        
+        private Sequence ShowPanel() => 
+            ServicesHolder.UIDialogService.ShowPanel();
+        private Sequence HidePanel(float duration) => 
+            ServicesHolder.UIDialogService.HidePanel(duration);
+        private Sequence ShowPanel(float duration) => 
+            ServicesHolder.UIDialogService.ShowPanel(duration);
+        private Sequence HidePanel() => 
+            ServicesHolder.UIDialogService.HidePanel();
+        private Sequence PrintDialog(string text, float symbolPrintDuration, float pitch = 1) =>
+            ServicesHolder.UIDialogService.PrintDialog(text, symbolPrintDuration, pitch);
+        private Sequence PrintDialogWoCleaning(string oldText, string text, float symbolPrintDuration,
+            float pitch = 1) =>
+            ServicesHolder.UIDialogService.PrintDialogWoCleaning(oldText, text, symbolPrintDuration, pitch);
+
+        private void ClearPanel() => ServicesHolder.UIDialogService.ClearPanel();
+        
+        private Sequence AddDialog(string text, float symbolPrintDuration, float pitch = 1) =>
+            ServicesHolder.UIDialogService.AddDialog(text, symbolPrintDuration, pitch);
+        
         public override void OnStart()
         {
             var dialogService = ServicesHolder.UIDialogService;
             //var standartDuration = 0.06f;
-            ;
 
             DOTween.Sequence()
                 .AppendInterval(2f)
-                .Append(dialogService.ShowPanel())
-                .Join(dialogService.PrintDialog("Oh, hi. You are a new guy?", charDuration, workerPitch))
+                .Append(ShowPanel())
+                .Join(PrintDialog("Oh, hi. ", charDuration, workerPitch))
+                .AppendInterval(0.5f)
+                .Append(PrintDialogWoCleaning("Oh, hi. ", "You are a new guy", charDuration, workerPitch))
                 .AppendInterval(0.7f)
-                .Append(dialogService.PrintDialogWoCleaning("Oh, hi. You are a new guy? ", "You're late", charDuration, workerPitch))
+                .Append(PrintDialog("You're kinda late!", charDuration, workerPitch))
+                .AppendInterval(0.3f)
+                .Append(HidePanel(0.3f))
+                .AppendCallback(ClearPanel)
+                .Append(ShowPanel(0.3f))
+                .Append(PrintDialog("What", charDuration, characterPitch))
+                .Append(PrintDialog("Erm,", charDuration, characterPitch))
+                .AppendInterval(0.7f)
+                .Append(PrintDialogWoCleaning("Erm,", " yeah.", charDuration, characterPitch))
+                .AppendInterval(0.7f)
+                .Append(PrintDialogWoCleaning("Erm, yeah.", " Sorry", charDuration, characterPitch))
                 .AppendInterval(1f)
-                .Append(dialogService.HidePanel(0.1f))
-                .Append(dialogService.ShowPanel(0.1f))
-                .Append(dialogService.PrintDialog("Wha", charDuration, characterPitch))
-                .Append(dialogService.PrintDialog("Erm,", charDuration, characterPitch))
-                .AppendInterval(0.7f)
-                .Append(dialogService.AddDialog(" yeah", charDuration, characterPitch))
-                .AppendInterval(0.7f)
-                .Append(dialogService.AddDialog(" sure", charDuration, characterPitch));
-                
-            ServicesHolder.RaycastService._onHit += OnRaycast;
+                .Append(HidePanel(0.3f))
+                .AppendCallback(ClearPanel)
+                .Append(ShowPanel(0.3f))
+                .Append(PrintDialog("Common, pun on a suit.", charDuration, workerPitch))
+                .AppendInterval(0.2f)
+                .Append(PrintDialogWoCleaning("Common, pun on a suit. ", "We're already behind schedule", charDuration, workerPitch))
+                .AppendInterval(0.5f)
+                .Append(HidePanel())
+                .JoinCallback(() =>
+                {
+                    ServicesHolder.RaycastService._onHit += OnRaycast;
+                    ServicesHolder.ObjectiveService.PrintObjective("Put on a hazmat suit");
+                });
         }
 
         protected override void EndClip()
@@ -88,7 +124,9 @@ namespace InternalAssets.Scripts.NarrativeClips.Act3
             if (interactable.CustomTags.Contains("hazmat"))
             {
                 ServicesHolder.ObjectiveService.ClearPanel();
+                outCollider.SetActive(false);
                 ServicesHolder.RaycastService.MarkDisableOutline(interactable);
+                EndCallback();
             }
         }
     }
