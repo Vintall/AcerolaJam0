@@ -9323,6 +9323,8 @@ MonoBehaviour:
   teleporterAudioSource: {fileID: 1907538066}
   electricityVFX: {fileID: 704239206}
   ambientAudioSource: {fileID: 864731481}
+  playerEyeUp: {fileID: 60128585}
+  playerEyeDown: {fileID: 136449799}
 --- !u!1 &741107339
 GameObject:
   m_ObjectHideFlags: 0

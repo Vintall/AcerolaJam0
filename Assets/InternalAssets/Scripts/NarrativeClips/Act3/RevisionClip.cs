@@ -169,6 +169,7 @@ namespace InternalAssets.Scripts.NarrativeClips.Act3
             {
                 textbookHandheld.parent = hidePosition;
                 shelfHighlight.gameObject.SetActive(false);
+                ServicesHolder.RaycastService._onHit -= OnRaycast;
                 DOTween.Sequence()
                     .Append(textbookHandheld.DOMove(dispensePosition.position, 0.5f))
                     .AppendCallback(() =>
@@ -181,7 +182,7 @@ namespace InternalAssets.Scripts.NarrativeClips.Act3
                         DOTween.Sequence()
                             .AppendCallback(() =>
                             {
-                                ServicesHolder.RaycastService._onHit -= OnRaycast;
+                                
                             })
                             .AppendInterval(1f)
                             .Append(ShowPanel())
