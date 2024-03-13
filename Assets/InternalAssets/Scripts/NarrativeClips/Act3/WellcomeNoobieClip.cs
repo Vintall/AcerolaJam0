@@ -10,7 +10,7 @@ namespace InternalAssets.Scripts.NarrativeClips.Act3
 {
     public class WellcomeNoobieClip : PlayableNarrativeClip
     {
-        [SerializeField] private float workerPitch = 1.1f;
+        [SerializeField] private float workerPitch = 1.5f;
         [SerializeField] private float characterPitch = 1;
         [SerializeField] private float charDuration = 0.06f;
         [SerializeField] private GameObject outCollider;

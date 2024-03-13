@@ -7,7 +7,7 @@ namespace InternalAssets.Scripts.Services.InteractionService.InteractionScripts.
 {
     public class HangNewSignsClip : PlayableNarrativeClip
     {
-        [SerializeField] private float workerPitch = 1.1f;
+        [SerializeField] private float workerPitch = 1.5f;
         [SerializeField] private float characterPitch = 1;
         [SerializeField] private float charDuration = 0.06f;
 
@@ -49,16 +49,16 @@ namespace InternalAssets.Scripts.Services.InteractionService.InteractionScripts.
                 .AppendInterval(0.5f)
                 .Append(PrintDialogWoCleaning(
                     "Take those an hang them around entrance. ", 
-                    "There is a visor in your suit. I'v marked positions", 
+                    "There is a visor in your suit. I've marked positions", 
                     charDuration, 
                     workerPitch))
+                .AppendInterval(0.5f)
+                .Append(HidePanel())
                 .AppendCallback(() =>
                 {
                     ServicesHolder.RaycastService._onHit += OnRaycast;
                     ServicesHolder.ObjectiveService.PrintObjective("Take the signs");
-                })
-                .AppendInterval(0.5f)
-                .Append(HidePanel());
+                });
         }
 
         protected override void EndClip()
@@ -123,17 +123,153 @@ namespace InternalAssets.Scripts.Services.InteractionService.InteractionScripts.
                 signPlaces[0].gameObject.SetActive(true);
                 signPlaces[1].gameObject.SetActive(true);
                 signPlaces[2].gameObject.SetActive(true);
+
+
+                DOTween.Sequence()
+                    .AppendCallback(() =>
+                    {
+                        ServicesHolder.RaycastService._onHit -= OnRaycast;
+                    })
+                    .Append(ShowPanel())
+                    .Join(PrintDialog(
+                        "While you're busy, I'll bring you up to speed.", 
+                        charDuration, 
+                        workerPitch))
+                    .AppendInterval(1f)
+                    .Append(PrintDialog(
+                        "What they already told you about staff around here?", 
+                        charDuration,
+                        workerPitch))
+                    .AppendInterval(0.5f)
+                    .Append(HidePanel(0.3f))
+                    .AppendCallback(ClearPanel)
+                    .Append(ShowPanel(0.3f))
+                    .Join(PrintDialog(
+                        "Not much",
+                        charDuration,
+                        characterPitch))
+                    .AppendInterval(0.5f)
+                    .Append(HidePanel(0.3f))
+                    .AppendCallback(ClearPanel)
+                    .Append(ShowPanel(0.3f))
+                    .Append(PrintDialog(
+                        "Well, that's ok.",
+                        charDuration,
+                        workerPitch))
+                    .AppendInterval(0.7f)
+                    .Append(PrintDialogWoCleaning(
+                        "Well, that's ok. ",
+                        "Everyone's a little nervous about information leaks. ",
+                        charDuration,
+                        workerPitch))
+                    .AppendInterval(1.5f)
+                    .Append(PrintDialog(
+                        "Just look at this place.",
+                        charDuration,
+                        workerPitch))
+                    .AppendInterval(0.7f)
+                    .Append(PrintDialogWoCleaning(
+                        "Just look at this place. ",
+                        "No wonder ...",
+                        charDuration,
+                        workerPitch))
+                    .AppendInterval(0.5f)
+                    .Append(HidePanel())
+                    .AppendCallback(() =>
+                    {
+                        ServicesHolder.RaycastService._onHit += OnRaycast;
+                    });
             }
             if (interactable.CustomTags.Contains("signplace"))
             {
                 signs[signsCount - 1].gameObject.SetActive(false);
                 --signsCount;
+
+                switch (signsCount)
+                {
+                    case 2:
+                        OnHangFirstSign();
+                        break;
+                    case 1:
+                        OnHangSecondSign();
+                        break;
+                }
+                
                 if (signsCount == 0)
                 {
                     Destroy(signsParent.gameObject);
                     EndCallback();
                 }
             }
+        }
+        
+        private void OnHangFirstSign()
+        {
+            DOTween.Sequence()
+                .AppendCallback(() =>
+                {
+                    ServicesHolder.RaycastService._onHit -= OnRaycast;
+                    ServicesHolder.GibberishService.SetVolume(0f);
+                })
+                .Append(ShowPanel())
+                .Join(PrintDialog(
+                    "*Oh my god...",
+                    charDuration,
+                    characterPitch))
+                .AppendInterval(0.7f)
+                .Append(PrintDialogWoCleaning(
+                    "Oh my god... ",
+                    "What the hell have I gotten myself into...*",
+                    charDuration,
+                    characterPitch))
+                .AppendCallback(() =>
+                {
+                    ServicesHolder.RaycastService._onHit += OnRaycast;
+                    ServicesHolder.GibberishService.SetDefaultVolume();
+                });
+        }
+
+        private void OnHangSecondSign()
+        {
+            DOTween.Sequence()
+                .AppendCallback(() =>
+                {
+                    ServicesHolder.RaycastService._onHit -= OnRaycast;
+                })
+                .Append(ShowPanel())
+                .Join(PrintDialog(
+                    "We'll be changing up the post each week.",
+                    charDuration,
+                    workerPitch))
+                .AppendInterval(0.7f)
+                .Append(PrintDialogWoCleaning(
+                    "We'll be changing up the post each week. ",
+                    "For the next week, you sit here and I work.",
+                    charDuration,
+                    workerPitch))
+                .AppendInterval(1f)
+                .Append(PrintDialog(
+                    "Company policy.",
+                    charDuration,
+                    workerPitch))
+                .AppendInterval(1.3f)
+                .Append(PrintDialogWoCleaning(
+                    "Company policy. ",
+                    "Something about security",
+                    charDuration,
+                    workerPitch))
+                .AppendInterval(1.8f)
+                .Append(PrintDialogWoCleaning(
+                    "Company policy. Something about security, ",
+                    "dunno",
+                    charDuration,
+                    workerPitch))
+                .AppendInterval(0.7f)
+                .Append(HidePanel())
+                .AppendCallback(() =>
+                {
+                    ServicesHolder.RaycastService._onHit += OnRaycast;
+                });
         }
     }
 }

@@ -13,11 +13,24 @@ namespace InternalAssets.Scripts.Services
         [SerializeField] private List<AudioClip> samples;
         [SerializeField] private float ratio;
         private Sequence _streamSequence;
-        
+
+        [SerializeField] private float defaultVolume;
         
         private void Start()
         {
             
+        }
+
+        public void SetVolume(float volume)
+        {
+            audioSource1.volume = volume;
+            audioSource2.volume = volume;
+        }
+
+        public void SetDefaultVolume()
+        {
+            audioSource1.volume = defaultVolume;
+            audioSource2.volume = defaultVolume;
         }
         
         public float PlaySound1()

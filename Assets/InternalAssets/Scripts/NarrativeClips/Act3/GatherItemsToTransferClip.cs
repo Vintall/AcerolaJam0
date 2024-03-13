@@ -30,39 +30,21 @@ namespace InternalAssets.Scripts.NarrativeClips.Act3
         private void ClearPanel() => ServicesHolder.UIDialogService.ClearPanel();
         #endregion
 
+        [SerializeField] private AudioSource keyboardAudioSource;
+        [SerializeField] private AudioSource electricityAudioSource;
+        [SerializeField] private AudioSource teleporterAudioSource;
+        [SerializeField] private ParticleSystem electricityParticleSystem;
+        
         public override void OnStart()
         {
-            var dialogService = ServicesHolder.UIDialogService;
-            //var standartDuration = 0.06f;
-
             ServicesHolder.RaycastService._onHit += OnRaycast;
             
-            return;
-            
-            DOTween.Sequence()
-                .AppendInterval(2f)
-                .Append(ShowPanel())
-                .Join(PrintDialog("Take those an hang them around entrance.", charDuration, workerPitch))
-                .JoinCallback(() =>
-                {
-                    
-                })
-                .AppendInterval(0.5f)
-                .Append(PrintDialogWoCleaning(
-                    "Take those an hang them around entrance. ", 
-                    "There is a visor in your suit. I'v marked positions", 
-                    charDuration, 
-                    workerPitch))
-                .AppendCallback(() =>
-                {
-                    
-                    ServicesHolder.ObjectiveService.PrintObjective("Take the signs");
-                });
+            ServicesHolder.ObjectiveService.PrintObjective("Send a message to internet. Then sabotage the station.");
         }
 
         protected override void EndClip()
         {
-            ServicesHolder.RaycastService._onHit -= OnRaycast;
+            
             onEndCallback?.Invoke();
         }
 
@@ -114,8 +96,21 @@ namespace InternalAssets.Scripts.NarrativeClips.Act3
             {
                 ServicesHolder.ObjectiveService.ClearPanel();
                 ServicesHolder.RaycastService.MarkDisableOutline(interactable);
+                ServicesHolder.RaycastService._onHit -= OnRaycast;
 
-                SceneManager.LoadScene(4);
+                DOTween.Sequence()
+                    .AppendCallback(() =>
+                    {
+                        teleporterAudioSource.Play();
+                        electricityAudioSource.Play();
+                        electricityParticleSystem.Play();
+                        keyboardAudioSource.Play();
+                        ServicesHolder.PlayerInputService.enabled = false;
+                    })
+                    .AppendCallback(() =>
+                    {
+                        SceneManager.LoadScene(4);
+                    });
             }
         }
     }
