@@ -163,7 +163,7 @@ namespace InternalAssets.Scripts.NarrativeClips.Act3
                 paperTwist.Play();
                 isTextbooksPicked = true;
                 textbooksHighlight.SetActive(false);
-                
+                ServicesHolder.RaycastService._onHit -= OnRaycast;
                 ServicesHolder.ObjectiveService.ClearPanel();
                 ServicesHolder.RaycastService.MarkDisableOutline(interactable);
                 clipboards.gameObject.SetActive(false);
