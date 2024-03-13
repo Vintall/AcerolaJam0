@@ -36,6 +36,8 @@ namespace InternalAssets.Scripts.NarrativeClips.Act3
         [SerializeField] private AudioSource teleporterAudioSource;
         [SerializeField] private VisualEffect electricityVFX;
         [SerializeField] private AudioSource ambientAudioSource;
+        [SerializeField] private Transform playerEyeUp;
+        [SerializeField] private Transform playerEyeDown;
         
         public override void OnStart()
         {
@@ -128,7 +130,7 @@ namespace InternalAssets.Scripts.NarrativeClips.Act3
                         "Huh? Who the hell are you? ",
                         "Stay where you are!",
                         charDuration,
-                        workerPitch + 0.1f))
+                        workerPitch))
                     .AppendInterval(0.5f)
                     .Append(HidePanel(0.1f))
                     .AppendCallback(ClearPanel)
@@ -192,6 +194,8 @@ namespace InternalAssets.Scripts.NarrativeClips.Act3
                         electricityAudioSource.Play();
                         electricityVFX.gameObject.SetActive(true);
                         electricityVFX.Play();
+                        playerEyeUp.localPosition = Vector3.zero;
+                        playerEyeDown.localPosition = Vector3.zero;
                         ambientAudioSource.DOFade(0, 2.5f);
                         electricityAudioSource.DOFade(0, 2.5f);
                     })

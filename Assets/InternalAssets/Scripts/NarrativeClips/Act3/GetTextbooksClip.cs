@@ -111,7 +111,6 @@ namespace InternalAssets.Scripts.NarrativeClips.Act3
 
         protected override void EndClip()
         {
-            ServicesHolder.RaycastService._onHit -= OnRaycast;
             onEndCallback?.Invoke();
         }
 
@@ -367,6 +366,8 @@ namespace InternalAssets.Scripts.NarrativeClips.Act3
                 sandpaper.Play();
                 shelfHighlight.SetActive(false);
                 clipboardsHandheld.parent = hidePosition;
+                isTextbooksPicked = false;
+                ServicesHolder.RaycastService._onHit -= OnRaycast;
                 DOTween.Sequence()
                     .Append(clipboardsHandheld.DOMove(dispensePosition.position, 0.3f))
                     .Append(clipboardsHandheld.DOMove(hidePosition.position, 0.3f))

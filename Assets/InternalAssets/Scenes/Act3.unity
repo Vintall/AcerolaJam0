@@ -1526,7 +1526,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
@@ -1622,7 +1622,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
@@ -5730,7 +5730,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1abdccfc8acb4efd8b637873ed29997d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionText: Put on
+  interactionText: Press E to put on
 --- !u!65 &429335361
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6283,9 +6283,9 @@ MonoBehaviour:
   m_fontSize: 20
   m_fontSizeBase: 20
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 30
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -6823,12 +6823,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
+  m_fontSize: 18
   m_fontSizeBase: 20
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 30
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -7711,7 +7711,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efe8d774784f4b7397898267706fdfdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interactionText: Conduct revision
+  _interactionText: Press E to conduct revision
 --- !u!1 &599415957
 GameObject:
   m_ObjectHideFlags: 0
@@ -8023,7 +8023,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efe8d774784f4b7397898267706fdfdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interactionText: Conduct revision
+  _interactionText: Press E to conduct revision
 --- !u!1 &650068617
 GameObject:
   m_ObjectHideFlags: 0
@@ -10917,7 +10917,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1abdccfc8acb4efd8b637873ed29997d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionText: Put on
+  interactionText: Press E to put on
 --- !u!65 &813451739
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12757,7 +12757,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efe8d774784f4b7397898267706fdfdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interactionText: Conduct revision
+  _interactionText: Press E to conduct revision
 --- !u!4 &1083446492 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3121739716584917759, guid: 0410535a2e117064ba9b685645e5597b,
@@ -13530,7 +13530,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 457a6861fae94a94b34ab411f8fee2db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionText: Hang sign on a fence
+  interactionText: Press E to hang sign on a fence
   sign: {fileID: 589839411}
 --- !u!65 &1165361126
 BoxCollider:
@@ -13797,7 +13797,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4fa650521a0479792fcff699136bc0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionText: Pick up signs
+  interactionText: Press E to pick up signs
 --- !u!1 &1192378989
 GameObject:
   m_ObjectHideFlags: 0
@@ -14779,7 +14779,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31e4960e648e47c5aa4a5bce3a6c3dc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interactionText: Pick up
+  _interactionText: Press E to pick up
 --- !u!114 &1255273096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15621,12 +15621,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
+  m_fontSize: 30
   m_fontSizeBase: 20
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 30
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -16748,7 +16748,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 457a6861fae94a94b34ab411f8fee2db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionText: Hang sign on a fence
+  interactionText: Press E to hang sign on a fence
   sign: {fileID: 1644380362}
 --- !u!65 &1497707388
 BoxCollider:
@@ -19794,7 +19794,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1abdccfc8acb4efd8b637873ed29997d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionText: Put on
+  interactionText: Press E to put on
 --- !u!65 &1707304313
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -20601,7 +20601,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fa94db436ba4efabf2b08950b5d6dd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interactionText: Send message
+  _interactionText: Press E to send a message
 --- !u!114 &1780630340
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24055,7 +24055,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1abdccfc8acb4efd8b637873ed29997d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionText: Put on
+  interactionText: Press E to put on
 --- !u!65 &1796533411
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25361,7 +25361,7 @@ MonoBehaviour:
   metalScratch: {fileID: 1516859175}
   metalPickup: {fileID: 34518231}
   fenceSound: {fileID: 2087103004}
-  shelfHighlight: {fileID: 0}
+  shelfHighlight: {fileID: 1216909958}
 --- !u!4 &1952290713 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5318610276468485763, guid: 1e5a3fd7a8394d145be88bdcc286b6aa,
@@ -25872,7 +25872,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.03
   m_Pitch: 1
   Loop: 0
@@ -26379,7 +26379,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efe8d774784f4b7397898267706fdfdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interactionText: Conduct revision
+  _interactionText: Press E to conduct revision
 --- !u!1 &2052855635
 GameObject:
   m_ObjectHideFlags: 0
@@ -26527,7 +26527,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 457a6861fae94a94b34ab411f8fee2db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionText: Hang sign on a fence
+  interactionText: Press E to hang sign on a fence
   sign: {fileID: 652307364}
 --- !u!65 &2059642028
 BoxCollider:
@@ -26944,7 +26944,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51107bfc3fd641eb8ca2ab561ee3c6f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interactionText: Pick up
+  _interactionText: Press E to pick up
 --- !u!114 &2106874113
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27414,7 +27414,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efe8d774784f4b7397898267706fdfdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interactionText: Conduct revision
+  _interactionText: Press E to conduct revision
 --- !u!1 &2141042073
 GameObject:
   m_ObjectHideFlags: 0
@@ -29223,7 +29223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
-  outlineColor: {r: 0.122641504, g: 0.11974902, b: 0.11974902, a: 1}
+  outlineColor: {r: 0.754717, g: 0.754717, b: 0.754717, a: 1}
   outlineWidth: 0
   precomputeOutline: 1
   bakeKeys:
@@ -29266,7 +29266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b8cb411f369481da43ef1236799cb86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interactionText: Put
+  _interactionText: Press E to put down
 --- !u!1001 &7584342129090478658
 PrefabInstance:
   m_ObjectHideFlags: 0

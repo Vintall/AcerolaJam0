@@ -20,8 +20,11 @@ namespace InternalAssets.Scripts.Services.UIServices
 
         public void PrintObjective(string text, float symbolPrintDuration = 0.05f)
         {
-            if(_printSequence != null)
-                return;
+            if (_printSequence != null)
+            {
+                _printSequence.Kill();
+                _printSequence = null;
+            }
             
             _printSequence = DOTween.Sequence()
                 .Append(objectivePanel.DOAnchorPosX(0, panelSlideDuration)

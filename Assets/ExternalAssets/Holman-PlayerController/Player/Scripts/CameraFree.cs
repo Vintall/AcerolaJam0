@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using InternalAssets.Scripts.Services;
 using UnityEngine;
 
 namespace HolmanPlayerController
@@ -15,6 +16,7 @@ namespace HolmanPlayerController
         private void Start()
         {
             Cursor.lockState = CursorLockMode.Locked;
+            sensitivity = StaticSettingsService.sensitivity;
         }
 
         private void Update()
