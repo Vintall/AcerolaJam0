@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/InternalAssets/Scenes/Act4.unity
     guid: 311042b9bb05f154ba3c97f59bc640f2
+  - enabled: 1
+    path: Assets/InternalAssets/Scenes/TheEnd.unity
+    guid: cbacc130ecb13eb4c98ff510622a2f0f
   m_configObjects: {}
