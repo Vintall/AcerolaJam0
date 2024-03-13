@@ -33,6 +33,10 @@ namespace InternalAssets.Scripts.Services.InteractionService.InteractionScripts.
         [SerializeField] private Outline[] signPlaces;
         [SerializeField] Transform playerItemSlot;
         [SerializeField] private Transform dispensePosition;
+        [SerializeField] private AudioSource metalScratch;
+        [SerializeField] private AudioSource metalPickup;
+        [SerializeField] private AudioSource fenceSound;
+        [SerializeField] private GameObject shelfHighlight;
         
         
         public override void OnStart()
@@ -43,7 +47,7 @@ namespace InternalAssets.Scripts.Services.InteractionService.InteractionScripts.
                 .Join(PrintDialog("Take those an hang them around entrance.", charDuration, workerPitch))
                 .JoinCallback(() =>
                 {
-                    //TODO scratch sound
+                    metalScratch.Play();
                     signsParent.DOMove(dispensePosition.position, 0.5f);
                 })
                 .AppendInterval(0.5f)
@@ -57,6 +61,7 @@ namespace InternalAssets.Scripts.Services.InteractionService.InteractionScripts.
                 .AppendCallback(() =>
                 {
                     ServicesHolder.RaycastService._onHit += OnRaycast;
+                    shelfHighlight.SetActive(true);
                     ServicesHolder.ObjectiveService.PrintObjective("Take the signs");
                 });
         }
@@ -113,6 +118,7 @@ namespace InternalAssets.Scripts.Services.InteractionService.InteractionScripts.
             
             if (interactable.CustomTags.Contains("signs"))
             {
+                shelfHighlight.SetActive(false);
                 ServicesHolder.ObjectiveService.ClearPanel();
                 ServicesHolder.RaycastService.MarkDisableOutline(interactable);
                 signsParent.tag = "Untagged";
@@ -123,7 +129,7 @@ namespace InternalAssets.Scripts.Services.InteractionService.InteractionScripts.
                 signPlaces[0].gameObject.SetActive(true);
                 signPlaces[1].gameObject.SetActive(true);
                 signPlaces[2].gameObject.SetActive(true);
-
+                metalPickup.Play();
 
                 DOTween.Sequence()
                     .AppendCallback(() =>
@@ -184,7 +190,7 @@ namespace InternalAssets.Scripts.Services.InteractionService.InteractionScripts.
             {
                 signs[signsCount - 1].gameObject.SetActive(false);
                 --signsCount;
-
+                fenceSound.Play();
                 switch (signsCount)
                 {
                     case 2:
@@ -218,7 +224,7 @@ namespace InternalAssets.Scripts.Services.InteractionService.InteractionScripts.
                     characterPitch))
                 .AppendInterval(0.7f)
                 .Append(PrintDialogWoCleaning(
-                    "Oh my god... ",
+                    "*Oh my god... ",
                     "What the hell have I gotten myself into...*",
                     charDuration,
                     characterPitch))
@@ -261,7 +267,7 @@ namespace InternalAssets.Scripts.Services.InteractionService.InteractionScripts.
                 .AppendInterval(1.8f)
                 .Append(PrintDialogWoCleaning(
                     "Company policy. Something about security, ",
-                    "dunno",
+                    "I guess",
                     charDuration,
                     workerPitch))
                 .AppendInterval(0.7f)

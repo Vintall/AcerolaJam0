@@ -39,6 +39,9 @@ namespace InternalAssets.Scripts.NarrativeClips.Act3
 
         [SerializeField] private Transform dispensePosition;
         [SerializeField] private Transform hidePosition;
+
+        [SerializeField] private AudioSource paperTwist;
+        [SerializeField] private AudioSource sandpaper;
         
         public override void OnStart()
         {
@@ -158,6 +161,7 @@ namespace InternalAssets.Scripts.NarrativeClips.Act3
             
             if (interactable.CustomTags.Contains("textbooks"))
             {
+                paperTwist.Play();
                 isTextbooksPicked = true;
                 textbooksHighlight.SetActive(false);
                 
@@ -360,6 +364,7 @@ namespace InternalAssets.Scripts.NarrativeClips.Act3
 
             if (interactable.CustomTags.Contains("shelf") && isTextbooksPicked)
             {
+                sandpaper.Play();
                 shelfHighlight.SetActive(false);
                 clipboardsHandheld.parent = hidePosition;
                 DOTween.Sequence()

@@ -4,6 +4,7 @@ using InternalAssets.Scripts.Services.InteractionService;
 using InternalAssets.Scripts.Services.NarrativeService.Impls;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.VFX;
 
 namespace InternalAssets.Scripts.NarrativeClips.Act3
 {
@@ -33,13 +34,14 @@ namespace InternalAssets.Scripts.NarrativeClips.Act3
         [SerializeField] private AudioSource keyboardAudioSource;
         [SerializeField] private AudioSource electricityAudioSource;
         [SerializeField] private AudioSource teleporterAudioSource;
-        [SerializeField] private ParticleSystem electricityParticleSystem;
+        [SerializeField] private VisualEffect electricityVFX;
+        [SerializeField] private AudioSource ambientAudioSource;
         
         public override void OnStart()
         {
             ServicesHolder.RaycastService._onHit += OnRaycast;
             
-            ServicesHolder.ObjectiveService.PrintObjective("Send a message to internet. Then sabotage the station.");
+            ServicesHolder.ObjectiveService.PrintObjective("Send a message");
         }
 
         protected override void EndClip()
@@ -101,12 +103,99 @@ namespace InternalAssets.Scripts.NarrativeClips.Act3
                 DOTween.Sequence()
                     .AppendCallback(() =>
                     {
-                        teleporterAudioSource.Play();
-                        electricityAudioSource.Play();
-                        electricityParticleSystem.Play();
                         keyboardAudioSource.Play();
                         ServicesHolder.PlayerInputService.enabled = false;
                     })
+                    .AppendInterval(3f)
+                    .AppendCallback(() =>
+                    {
+                        teleporterAudioSource.Play();
+                    })
+                    .AppendInterval(2f)
+                    .Append(ShowPanel())
+                    .Join(PrintDialog(
+                        "Huh?",
+                        charDuration,
+                        characterPitch))
+                    .AppendInterval(0.7f)
+                    .Append(PrintDialogWoCleaning(
+                        "Huh? ",
+                        "Who the hell are you?",
+                        charDuration,
+                        workerPitch))
+                    .AppendInterval(1.7f)
+                    .Append(PrintDialogWoCleaning(
+                        "Huh? Who the hell are you? ",
+                        "Stay where you are!",
+                        charDuration,
+                        workerPitch + 0.1f))
+                    .AppendInterval(0.5f)
+                    .Append(HidePanel(0.1f))
+                    .AppendCallback(ClearPanel)
+                    .Append(ShowPanel(0.2f))
+                    .Append(PrintDialog(
+                        "Wait, don't shoot. I'm just a new guy.",
+                        charDuration * 0.7f,
+                        1.7f))
+                    .AppendInterval(0.7f)
+                    .Append(PrintDialogWoCleaning(
+                        "Wait, don't shoot. I'm just a new guy. ",
+                        "They said they would warn about me",
+                        charDuration * 0.7f,
+                        1.7f))
+                    .AppendInterval(0.5f)
+                    .Append(HidePanel(0.1f))
+                    .AppendCallback(ClearPanel)
+                    .Append(ShowPanel(0.3f))
+                    .Join(PrintDialog(
+                        "We already had one today.",
+                        charDuration,
+                        workerPitch))
+                    .AppendInterval(0.7f)
+                    .Append(PrintDialogWoCleaning(
+                        "We already had one today. ",
+                        "Show me your ID.",
+                        charDuration,
+                        workerPitch))
+                    .AppendInterval(0.7f)
+                    .Append(PrintDialogWoCleaning(
+                        "We already had one today. Show me your ID. ",
+                        "Immediately",
+                        charDuration,
+                        workerPitch))
+                    .AppendInterval(3f)
+                    .Append(PrintDialog(
+                        "Oh no...",
+                        charDuration,
+                        workerPitch))
+                    .AppendInterval(1.5f)
+                    .Append(PrintDialogWoCleaning(
+                        "Oh no...",
+                        "That can't be good.",
+                        charDuration,
+                        workerPitch))
+                    .AppendInterval(1.5f)
+                    .Append(PrintDialog(
+                        "You peace of",
+                        charDuration,
+                        workerPitch))
+                    .Append(HidePanel(0))
+                    .AppendCallback(ClearPanel)
+                    .Append(ShowPanel(0))
+                    .Append(PrintDialog(
+                        "Wait, I can expl",
+                        charDuration,
+                        characterPitch))
+                    .Append(HidePanel())
+                    .JoinCallback(() =>
+                    {
+                        electricityAudioSource.Play();
+                        electricityVFX.gameObject.SetActive(true);
+                        electricityVFX.Play();
+                        ambientAudioSource.DOFade(0, 2.5f);
+                        electricityAudioSource.DOFade(0, 2.5f);
+                    })
+                    .AppendInterval(1.5f)
                     .AppendCallback(() =>
                     {
                         SceneManager.LoadScene(4);

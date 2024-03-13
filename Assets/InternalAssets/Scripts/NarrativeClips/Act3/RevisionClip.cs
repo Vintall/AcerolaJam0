@@ -45,6 +45,9 @@ namespace InternalAssets.Scripts.NarrativeClips.Act3
         [SerializeField] private Transform dispensePosition;
         [SerializeField] private Transform hidePosition;
         [SerializeField] private Transform playerItemSlot;
+        [SerializeField] private AudioSource paperCheckAudioSource;
+
+        [SerializeField] private AudioSource sandpaperAudioSource;
 
         public override void OnStart()
         {
@@ -67,7 +70,7 @@ namespace InternalAssets.Scripts.NarrativeClips.Act3
                     workerPitch))
                 .JoinCallback(() =>
                 {
-                    //TODO scratch sound
+                    sandpaperAudioSource.Play();
                     textbookInteractable.DOMove(dispensePosition.position, 0.5f);
                 })
                 .AppendInterval(0.5f)
@@ -75,6 +78,7 @@ namespace InternalAssets.Scripts.NarrativeClips.Act3
                 .AppendCallback(() =>
                 {
                     ServicesHolder.RaycastService._onHit += OnRaycast;
+                    shelfHighlight.SetActive(true);
                     ServicesHolder.ObjectiveService.PrintObjective("Take the clipboard");
                 });
         }
@@ -140,7 +144,7 @@ namespace InternalAssets.Scripts.NarrativeClips.Act3
                 ServicesHolder.RaycastService.MarkDisableOutline(interactable);
 
                 --revisionsLeft;
-
+                paperCheckAudioSource.Play();
                 switch (revisionsLeft)
                 {
                     case 4:
@@ -167,6 +171,10 @@ namespace InternalAssets.Scripts.NarrativeClips.Act3
                 shelfHighlight.gameObject.SetActive(false);
                 DOTween.Sequence()
                     .Append(textbookHandheld.DOMove(dispensePosition.position, 0.5f))
+                    .AppendCallback(() =>
+                    {
+                        sandpaperAudioSource.Play();
+                    })
                     .Append(textbookHandheld.DOMove(hidePosition.position, 0.5f))
                     .AppendCallback(() =>
                     {
@@ -198,6 +206,8 @@ namespace InternalAssets.Scripts.NarrativeClips.Act3
             
             if (interactable.CustomTags.Contains("textbook"))
             {
+                shelfHighlight.SetActive(false);
+                sandpaperAudioSource.Play();
                 textbookInteractable.gameObject.SetActive(false);
                 textbookHandheld.gameObject.SetActive(true);
                 playerItemSlot.position = textbookHandheld.position;
@@ -409,7 +419,7 @@ namespace InternalAssets.Scripts.NarrativeClips.Act3
                     "It's illegal. ",
                     "And immoral.",
                     charDuration,
-                    workerPitch))
+                    characterPitch))
                 .AppendInterval(1f)
                 .Append(HidePanel(0.5f))
                 .AppendCallback(ClearPanel)
@@ -425,7 +435,7 @@ namespace InternalAssets.Scripts.NarrativeClips.Act3
                     charDuration,
                     workerPitch))
                 .AppendInterval(1f)
-                .Join(PrintDialog(
+                .Append(PrintDialog(
                     "So that just how it goes.",
                     charDuration,
                     workerPitch))

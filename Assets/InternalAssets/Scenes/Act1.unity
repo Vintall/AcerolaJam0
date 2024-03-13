@@ -27506,6 +27506,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d151bb49135f5da4d97058f73a7956a5, type: 3}
   - {fileID: 8300000, guid: 329bae94e4a9dd44db4a192e9eb0b4b2, type: 3}
   ratio: 2
+  defaultVolume: 0
 --- !u!82 &318028095
 AudioSource:
   m_ObjectHideFlags: 0
@@ -55404,6 +55405,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ExcludeLayers.m_Bits
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2283609494985683474, guid: 55e4a7a4fc0d49b44bc4ce8384487cf3,
+        type: 3}
+      propertyPath: m_ShowToolkit
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2283609494985683474, guid: 55e4a7a4fc0d49b44bc4ce8384487cf3,
+        type: 3}
+      propertyPath: volumeLayer.m_Bits
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 4407030163418186570, guid: 55e4a7a4fc0d49b44bc4ce8384487cf3,
         type: 3}

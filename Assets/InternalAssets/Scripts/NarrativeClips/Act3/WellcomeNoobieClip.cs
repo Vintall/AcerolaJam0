@@ -33,6 +33,8 @@ namespace InternalAssets.Scripts.NarrativeClips.Act3
         
         private Sequence AddDialog(string text, float symbolPrintDuration, float pitch = 1) =>
             ServicesHolder.UIDialogService.AddDialog(text, symbolPrintDuration, pitch);
+
+        [SerializeField] private AudioSource hazmatAudioSource;
         
         public override void OnStart()
         {
@@ -123,6 +125,7 @@ namespace InternalAssets.Scripts.NarrativeClips.Act3
             
             if (interactable.CustomTags.Contains("hazmat"))
             {
+                hazmatAudioSource.Play();
                 ServicesHolder.ObjectiveService.ClearPanel();
                 outCollider.SetActive(false);
                 ServicesHolder.RaycastService.MarkDisableOutline(interactable);
